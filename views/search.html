@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>EECS 485</title>
+<meta charset="UTF-8">
+<meta name="description" content="Search Engine">
+<meta name="author" content="Qiuhan Zhu, Lu Wang">
+</head>
+
+<script>
+function showWValue(id) {
+    document.getElementById("wvalue").innerHTML = document.getElementById(id).value;
+}
+function showDetails(pageid) {
+    document.getElementById(pageid).style.display = "block";
+}
+function hideDetails(pageid) {
+    document.getElementById(pageid).style.display = "none";
+}
+</script>
+
+<body>
+
+{% extends "base.html" %}
+{% block content %}
+    <h1>SEARCH INDEX</h1>
+    <p class="center">
+      Welcome!
+    </p>
+    <br>
+    <form action="/j89pws9vn291/pa6/search" method="get">
+    	<input type="text" name="query" required="required"><br>
+        <input type="range" name="w-value" id="w" required="required" step="0.05" max="1" value="0.5" onchange="showWValue(this.id)">
+        <p id="wvalue">0.5</p><br>
+    	<button type="submit">Search</button>
+    </form>
+
+    <br>
+    {% if result %}
+    	<table>
+            <tr>URLs Found</tr>
+            <br>
+			{% for page in pages %}
+			<tr>
+                <a href="{{page.url}}">{{page.url}}</a>
+                <br>
+                <button type="button" onclick="showDetails({{page.id}})">Show Details</button>
+                <button type="button" onclick="hideDetails({{page.id}})">Hide Details</button>
+                <br>
+                <div id="{{page.id}}" style="display: none">
+                    <img src="{{page.imgUrl}}" height="100">
+                    <p>Categories: </p>
+                    {% for category in page.category %}
+                        <p>{{category.0}}</p>
+                    {% endfor %}
+                    <p>Summary: </p>
+                    <p>{{page.summary}}</p>
+                </div>
+            </tr>
+			{% endfor %}
+		</table>
+    {% endif %}
+{% endblock %}
+
+</body>
+</html>

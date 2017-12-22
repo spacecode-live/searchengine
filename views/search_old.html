@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>EECS 485</title>
+<meta charset="UTF-8">
+<meta name="description" content="Online Photo Album">
+<meta name="author" content="Qiuhan Zhu, Lu Wang">
+</head>
+
+<body>
+
+{% extends "base.html" %}
+{% block content %}
+    <h1>SEARCH INDEX</h1>
+    <p class="center">
+      Welcome!
+    </p>
+    <br>
+    <form action="/j89pws9vn291/pa4/search" method="get">
+    	<input type="text" name="query" required="required">
+    	<button type="submit">Search</button>
+    </form>
+
+    <br>
+    {% if result %}
+    	<table>
+    		<tr>Totally found {{size}} results.</tr>
+			<tr>
+				<td>Pictures</td>
+				<td>Caption</td>
+				<td>Date</td>
+			</tr>
+			{% for picInfo in picList %}
+				<tr>
+					<td>
+						<a href="/j89pws9vn291/pa4/search?query={{picInfo.1}}"><img src="/static/{{picInfo.0}}" width="30%" />
+					</td>
+					<td>{{picInfo.1}}</td>
+					<td>{{picInfo.2}}</td>
+				</tr>
+			{% endfor %}
+		</table>
+    {% endif %}
+{% endblock %}
+
+</body>
+</html>
