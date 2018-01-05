@@ -1,5 +1,10 @@
 # searchengine
 
+* register required website
+* will send newly registered user confirmation email
+* search related photo through a keyword provided by user
+* search results ranked by algorithm such as pagerank or HITS
+
 ### Setup
 if you would like to use virtual environment, do
 
